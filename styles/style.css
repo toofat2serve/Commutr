@@ -1,0 +1,65 @@
+body {
+	background-color: black;
+	color: white;
+}
+
+.pagewrapper {
+	width: 480px;
+	margin: 0 auto;
+}
+
+input,
+label,
+select {
+	box-sizing: border-box;
+	text-align: center;
+	margin: 5px auto;
+}
+
+.origin,
+.destination {
+	width: 100%;
+}
+
+fieldset {
+	border: 1px solid white;
+	border-radius: 15px;
+	padding: 0 20px 20px;
+}
+
+legend {
+	display: inline-block;
+	text-align: center;
+	margin-top: -30px;
+	border: 1px solid white;
+	border-radius: 15px;
+	padding: 5px;
+}
+
+td,
+th {
+	border: 1px solid white;
+	text-align: center;
+	padding: 5px;
+}
+
+table {
+	width: 100%;
+	table-layout: fixed;
+}
+
+table> tr:first-child> th:first-child {
+	border-top-left-radius: 15px;
+}
+
+table> tr:first-child> th:last-child {
+	border-top-right-radius: 15px;
+}
+
+table> tr:last-child> td:first-child {
+	border-bottom-left-radius: 15px;
+}
+
+table> tr:last-child> td:last-child {
+	border-bottom-right-radius: 15px;
+}

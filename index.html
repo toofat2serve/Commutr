@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<base target="_blank">
+		<title>Commute Evaluator</title>		
+		<script src="bin/drivetime.js"></script>
+		<script src="bin/jq32.js"></script>
+		<script src="bin/jquery-ui.js"></script>
+		<link rel="stylesheet" href="styles/reset.css">
+		<link rel="stylesheet" href="styles/style.css">
+		<link rel="stylesheet" href="styles/jquery-ui.css">
+		<link rel="stylesheet" href="styles/jquery-ui.structure.css">
+		<link rel="stylesheet" href="styles/jquery-ui.theme.css">
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWMdnMsKvbd7gu3Er0hxkLHlMvcvjKNds&libraries=geometry"></script>
+	</head>
+	<body onload="genForm()">
+	<div class="pagewrapper">
+		<form class="gmquery" action=".">
+			<fieldset class="location">
+				<legend>Location</legend>
+				<label for="origin">Origin</label>
+				<input type="text" name="origin" class="origin" required="required">
+				<label for="destination">Destination</label>
+				<input type="text" name="destination" class="destination" required="required">	
+			</fieldset>
+			<fieldset class="dateTime">
+				<legend>Date/Time</legend>
+				<label for="date">Date</label>
+				<input type="date" name="date" class="date" required="required">
+
+				<label for="time">Time</label>
+				<select name="time" class="time"></select>
+			</fieldset>
+			<fieldset class="commute">
+				<legend>Commute Options</legend>
+				<label for="intervals">Intervals</label>
+				<select name="intervals" class="intervalselect"></select>
+				<label for="timespan">Time Span</label>
+				<select name="timespan" class="timespanselect"></select>
+				<label for="outlook">Outlook</label>
+				<select name="outlook" class="outlookselect"></select>
+			</fieldset>
+			<input type="Submit" value="Submit">
+		</form>
+		<table class="results"></table>
+	</div>
+	</body>
+</html>
