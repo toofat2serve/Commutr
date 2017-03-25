@@ -4,7 +4,13 @@ function fb(l, d) {
 	console.log(l + ":");
 	console.log(d);
 }
-
+function prettyTime(dT) {
+			var minStr = dT.getMinutes() < 10 ? "0" + dT.getMinutes() : dT.getMinutes();
+			var ampm = dT.getHours() > 11 ? "PM" : "AM";
+			var hrStr = dT.getHours() > 11 ? dT.getHours() - 12 : dT.getHours();
+			hrStr = hrStr < 10 ? "0" + hrStr : hrStr;
+			return hrStr + ":" + minStr + " " + ampm;
+}
 function hours() {
 	return ["12AM", "1AM", "2AM", "3AM", "4AM", "5AM", "6AM", "7AM", "8AM", "9AM", "10AM", "11AM", "12PM", "1PM", "2PM", "3PM", "4PM", "5PM", "6PM", "7PM", "8PM", "9PM", "10PM", "11PM"];
 }
@@ -24,7 +30,11 @@ function compDate() {
 }
 
 function submitMe() {
+	//Establish a callbacks object
+	var callbacks = $.Callbacks( "unique" );
+	
 	// Establish the table for the ajax return
+
 	var t = $(".results");
 	t.empty();
 	var tr = $("<tr></tr>");
@@ -67,16 +77,46 @@ function submitMe() {
 
 	//Loop through iterations, adding time as needed
 	for (i = 0; i < iterations; i++) {
+		
+		// Add a row for each query
+		tr = $("<tr id='" + i + "''></tr>");
+		tr.append($("<td></td>"));
+		tr.append($("<td></td>"));
+		
+		// Manage the timestamp and incrementation
 		if (minHand === 60) {
 			minHand = 0;
 			hrHand += 1;
 		}
 		runDt.setHours(hrHand, minHand);
 		minHand += iv;
-
 		var timeStamp = Number(Date.parse(runDt)) / 1000;
-		askGoogle(o, d, timeStamp, outlook);
-	}
+		var dOpts = {
+			departureTime: new Date(timeStamp * 1000),
+			trafficModel: outlook
+			};
+		var mydata = {
+			origins: [o],
+			destinations: [d],
+			travelMode: 'DRIVING',
+			drivingOptions: dOpts,
+			};
+				
+		var service = new google.maps.DistanceMatrixService();
+		service.getDistanceMatrix(mydata, function() { });
+}
+
+function googleCallback(r,s) {
+	
+}
+
+function queGoogle(mydata) {
+	var service = new google.maps.DistanceMatrixService();
+	service.getDistanceMatrix(mydata, function callback(response, st) {
+		
+	};
+
+	
 }
 
 function askGoogle(o, d, ts, ol) {
@@ -99,6 +139,7 @@ function askGoogle(o, d, ts, ol) {
 		if (st === "OK") {
 			var travelTime = Math.round(response.rows[0].elements[0].duration_in_traffic.value / 60, 0);
 			var dT = mydata.drivingOptions.departureTime;
+			departureTime = prettyTime(dT);
 			var minStr = dT.getMinutes() < 10 ? "0" + dT.getMinutes() : dT.getMinutes();
 			var ampm = dT.getHours() > 11 ? "PM" : "AM";
 			var hrStr = dT.getHours() > 11 ? dT.getHours() - 12 : dT.getHours();
