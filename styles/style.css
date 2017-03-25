@@ -18,6 +18,8 @@ select {
 	border-radius: 15px;
 }
 
+
+
 .origin,
 .destination {
 	width: 100%;
@@ -28,15 +30,22 @@ fieldset {
 }
 
 legend {
+	box-sizing: border-box;
+	text-align: center;
+	width: 150px;
 	border: 1px solid white;
 	border-radius: 15px;
-	padding: 5px;
-	margin: -50px auto 0;
+	
 }
 
-div.bwrap {
+.bwrap {
 	border: 1px solid white;
 	border-radius: 15px;
+}
+
+.cwrap {
+	width: 150px;
+	margin: 0 auto;
 }
 td,
 th {
