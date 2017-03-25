@@ -105,7 +105,9 @@ function askGoogle(o, d, ts, ol) {
 			var hrStr = dT.getHours() > 11 ? dT.getHours() - 12 : dT.getHours();
 			hrStr = hrStr < 10 ? "0" + hrStr : hrStr;
 			var departureTime = hrStr + ":" + minStr + " " + ampm;
-			var tr = $("<tr></tr>");
+			var dTms = new Date(dT);
+			dTms = dTms.valueOf();
+			var tr = $("<tr v='" + dTms + "'></tr>");
 			tr.append($("<td></td>").text(departureTime));
 			tr.append($("<td></td>").text(travelTime));
 			$(".results").append(tr);
@@ -117,12 +119,27 @@ function askGoogle(o, d, ts, ol) {
 }
 
 function orderRows() {
-	var t = $(".results > tr");
+	// Because asynchronous means asynchronous.
+	var rows = []
+	var t = $(".results > tr:has(td)");
 	var numRows = t.length;
-	alert(numRows);
+	if (numRows > 0) {
+		for (var i in t) {
+			var rowObj = {
+							order: i,
+							depTimeCode: t[i].attributes[0].nodevalue,
+							depTimeDisp: t[i].firstChild.innerText,
+							comTimeDisp: t[i].lastChild.innerText
+						};
+			rows.push(rowObj);
+		}
+	}
 }
 
 function genForm() {
+	// Since IE is a butt, a little JS magic to get rounded corners on the fieldsets
+	// and legends by wrapping them in classed divs.
+	$("fieldset").wrap("<div class='bwrap'></div>");
 	//Set up the minimum date validation
 	var testing = true;
 	var opt;
@@ -188,17 +205,5 @@ function genForm() {
 		eventIn.preventDefault();
 		submitMe();
 	});
-	//jQuery Stuff
-//	$(".date").datepicker({
-//		dateFormat: "mm-dd-yy",
-//		showOn: "button",
-//		minDate: new Date(),
-//		showButtonPanel: true,
-//		defaultDate: new Date()
-//	});
-	
-//	$(".time").selectmenu({
-		
-	//});
 
 }
