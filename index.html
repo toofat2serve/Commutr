@@ -11,10 +11,10 @@
 		<link rel="stylesheet" href="styles/reset.css">
 		<link rel="stylesheet" href="styles/style.css">
 		
-<!--		<script src="bin/jquery-ui.js"></script>
+		<script src="bin/jquery-ui.js"></script>
 		<link rel="stylesheet" href="styles/jquery-ui.css">
 		<link rel="stylesheet" href="styles/jquery-ui.structure.css">
-		<link rel="stylesheet" href="styles/jquery-ui.theme.css"> -->
+		<link rel="stylesheet" href="styles/jquery-ui.theme.css">
 		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWMdnMsKvbd7gu3Er0hxkLHlMvcvjKNds&libraries=geometry"></script>
 	</head>
 	<body onload="genForm()">
@@ -26,6 +26,7 @@
 				<input type="text" name="origin" class="origin" required="required">
 				<label for="destination">Destination</label>
 				<input type="text" name="destination" class="destination" required="required">	
+				<input type="button" value="Swap" class=".swap" onclick="swap()">
 			</fieldset>
 			<fieldset class="dateTime">
 				<legend>Date/Time</legend>
